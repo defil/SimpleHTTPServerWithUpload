@@ -124,7 +124,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         while remainbytes > 0:
             line = self.rfile.readline()
             remainbytes -= len(line)
-            fn = re.findall(r'Content-Disposition.*name="file"; filename="(.*)"', line.decode())
+            fn = re.findall(r'Content-Disposition.*name="file"; filename="([^\/]*)"', line)
             if not fn:
                 return (False, "Can't find out file name...")
             path = self.translate_path(self.path)
